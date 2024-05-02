@@ -21,7 +21,11 @@ jobs:
     - name: add googletest submodule
       run: |
         cd tests
-        git submodule add https://github.com/google/googletest.git
+        if [-d "googletest" ]; then
+          git clone --recursive https://github.com/google/googletest.git
+        else
+          git submodule add https://github.com/google/googletest.git
+        fi
         cd ..
     
     - name: build
@@ -33,3 +37,4 @@ jobs:
     - name: run tests
       run: |
         ./runAllTests
+        cd ..
