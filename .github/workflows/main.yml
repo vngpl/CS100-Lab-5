@@ -32,8 +32,9 @@ jobs:
         cd build
         cmake ..
         make
-    
-    - name: run
-      run: |
-        cd build
         ./bin/runAllTests
+    
+    # - name: run
+    #   run: |
+    #     cd build
+    #     ./bin/runAllTests
