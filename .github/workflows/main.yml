@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   pull_request:
     branches: [ main ]
 
@@ -18,24 +18,22 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    # Runs a single command using the runners shell
     - name: add googletest submodule
       run: |
-        cd tests
-        # if [-d "googletest" ]; then
-        #   git clone --recursive https://github.com/google/googletest.git
-        # else
-        #   git submodule add https://github.com/google/googletest.git
-        # fi
-        git submodule init && git submodule update
-        cd ..
-    
+        # git submodule update --init --recursive
+        git submodule init
+        git submodule update
+
+    # Runs a set of commands using the runners shell
     - name: build
       run: |
         mkdir build
         cd build
-        g++ ../tests/test.cpp -o runAllTests
+        cmake ..
+        make
     
-    - name: run tests
+    - name: run
       run: |
-        ./runAllTests
-        cd ..
+        cd build
+        ./bin/runAllTests
