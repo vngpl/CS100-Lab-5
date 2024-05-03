@@ -34,9 +34,6 @@ TEST(PerimeterTests, nonZeroDimensions) {
     EXPECT_EQ(rect.perimeter(), 14);
 }
 
-#include "../header/rectangle.hpp"
-#include "gtest/gtest.h"
-
 // TEST(ConstructorTests, DefaultConstructor) {
 //   Rectangle r;
 //   EXPECT_EQ(r.area(), 0);
